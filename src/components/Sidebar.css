@@ -1,0 +1,326 @@
+/* === Overlay (Fondo oscuro cuando sidebar está activo) === */
+.sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, rgba(0, 0, 0, 0.4), rgba(0, 123, 255, 0.1));
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sidebar-overlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* === Sidebar Principal === */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -320px;
+  width: 320px;
+  height: 100%;
+  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+  box-shadow: 
+    4px 0 25px rgba(0, 0, 0, 0.1),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
+  transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1001;
+  display: flex;
+  flex-direction: column;
+  border-radius: 0 24px 24px 0;
+  overflow: hidden;
+}
+
+.sidebar.open {
+  left: 0;
+}
+
+/* === Encabezado del Sidebar === */
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 24px 20px;
+  background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.sidebar-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+  opacity: 0.1;
+  pointer-events: none;
+}
+
+.sidebar-header h3 {
+  margin: 0;
+  font-size: 1.5em;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  position: relative;
+  z-index: 1;
+}
+
+.close-sidebar-button {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  font-size: 1.4em;
+  color: white;
+  cursor: pointer;
+  padding: 8px;
+  line-height: 1;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+  position: relative;
+  z-index: 1;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.close-sidebar-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.1);
+}
+
+/* === Navegación === */
+.sidebar-nav {
+  flex-grow: 1;
+  padding: 20px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  overflow-y: auto;
+}
+
+.sidebar-nav::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar-nav::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebar-nav::-webkit-scrollbar-thumb {
+  background: rgba(0, 123, 255, 0.2);
+  border-radius: 3px;
+}
+
+.sidebar-nav::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 123, 255, 0.4);
+}
+
+/* === Items de navegación === */
+.nav-item {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 14px 16px;
+  text-align: left;
+  background: none;
+  border: none;
+  color: #374151;
+  font-size: 0.95em;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 2px;
+}
+
+.nav-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: #007bff;
+  transform: scaleY(0);
+  transition: transform 0.2s ease;
+  border-radius: 0 2px 2px 0;
+}
+
+.nav-item:hover {
+  background: linear-gradient(135deg, rgba(0, 123, 255, 0.08) 0%, rgba(0, 123, 255, 0.04) 100%);
+  color: #007bff;
+  transform: translateX(4px);
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.15);
+}
+
+.nav-item:hover::before {
+  transform: scaleY(1);
+}
+
+.nav-item.active {
+  background: linear-gradient(135deg, rgba(0, 123, 255, 0.1) 0%, rgba(0, 123, 255, 0.05) 100%);
+  color: #007bff;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(0, 123, 255, 0.2);
+}
+
+.nav-item.active::before {
+  transform: scaleY(1);
+}
+
+/* === Iconos para los items === */
+.nav-item-icon {
+  margin-right: 12px;
+  font-size: 1.1em;
+  width: 20px;
+  text-align: center;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+.nav-item:hover .nav-item-icon,
+.nav-item.active .nav-item-icon {
+  opacity: 1;
+}
+
+/* === Separadores === */
+.sidebar-nav hr {
+  border: none;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0, 123, 255, 0.2), transparent);
+  margin: 16px 8px;
+  opacity: 0.6;
+}
+
+/* === Secciones === */
+.sidebar-section-title {
+  font-weight: 700;
+  padding: 16px 16px 8px;
+  color: #6b7280;
+  font-size: 0.8em;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: 8px;
+}
+
+.no-tags-sidebar {
+  padding: 12px 16px;
+  font-size: 0.85em;
+  color: #9ca3af;
+  text-align: center;
+  font-style: italic;
+}
+
+.sidebar-tags-list {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  gap: 2px;
+}
+
+.tag-filter-item {
+  justify-content: flex-start;
+  padding-left: 32px;
+  font-weight: 400;
+  font-size: 0.9em;
+  color: #6b7280;
+}
+
+.tag-filter-item:hover {
+  color: #007bff;
+  background: linear-gradient(135deg, rgba(0, 123, 255, 0.06) 0%, rgba(0, 123, 255, 0.02) 100%);
+}
+
+/* === Items especiales (logout, perfil) === */
+.nav-item.danger {
+  color: #dc2626;
+  margin-top: auto;
+}
+
+.nav-item.danger:hover {
+  background: linear-gradient(135deg, rgba(220, 38, 38, 0.08) 0%, rgba(220, 38, 38, 0.04) 100%);
+  color: #dc2626;
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.15);
+}
+
+.nav-item.danger::before {
+  background: #dc2626;
+}
+
+.nav-item.profile {
+  color: #059669;
+}
+
+.nav-item.profile:hover {
+  background: linear-gradient(135deg, rgba(5, 150, 105, 0.08) 0%, rgba(5, 150, 105, 0.04) 100%);
+  color: #059669;
+  box-shadow: 0 4px 12px rgba(5, 150, 105, 0.15);
+}
+
+.nav-item.profile::before {
+  background: #059669;
+}
+
+/* === Efectos de entrada === */
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.sidebar.open .nav-item {
+  animation: slideInLeft 0.3s ease forwards;
+}
+
+.sidebar.open .nav-item:nth-child(1) { animation-delay: 0.05s; }
+.sidebar.open .nav-item:nth-child(2) { animation-delay: 0.1s; }
+.sidebar.open .nav-item:nth-child(3) { animation-delay: 0.15s; }
+.sidebar.open .nav-item:nth-child(4) { animation-delay: 0.2s; }
+.sidebar.open .nav-item:nth-child(5) { animation-delay: 0.25s; }
+.sidebar.open .nav-item:nth-child(6) { animation-delay: 0.3s; }
+
+/* === Responsive === */
+@media (max-width: 480px) {
+  .sidebar {
+    width: 100%;
+    left: -100%;
+    border-radius: 0;
+  }
+  
+  .sidebar.open {
+    left: 0;
+  }
+  
+  .sidebar-header {
+    padding: 20px 20px 16px;
+  }
+  
+  .sidebar-nav {
+    padding: 16px 12px;
+  }
+  
+  .nav-item {
+    padding: 16px 14px;
+    font-size: 1em;
+  }
+}
+
+/* === Prevenir scroll del body cuando sidebar está abierto === */
+body.sidebar-open {
+  overflow: hidden;
+  height: 100vh;
+}

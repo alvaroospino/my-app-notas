@@ -1,0 +1,183 @@
+/* src/components/TagManager.css */
+
+.tag-manager-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.tag-manager-modal {
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  width: 90%;
+  max-width: 600px; /* Un poco más pequeño que NoteDetail */
+  display: flex;
+  flex-direction: column;
+  max-height: 80vh; /* Máxima altura del modal */
+  overflow: hidden;
+}
+
+/* Reutiliza estilos de modal-header, modal-body, modal-footer, close-button */
+/* Si ya están definidos globalmente en App.css o NoteDetail.css */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  border-bottom: 1px solid #eee;
+  background-color: #f8f9fa;
+}
+
+.modal-header h2 {
+  margin: 0;
+  color: #333;
+  font-size: 1.5em;
+}
+
+.close-button {
+  border: none;
+  font-size: 2em;
+  color: #666;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+}
+
+.modal-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow-y: auto;
+  flex-grow: 1;
+}
+
+
+
+.cancel-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+  background-color: #6c757d;
+  color: white;
+  transition: background-color 0.2s ease;
+}
+
+.cancel-button:hover {
+  background-color: #5a6268;
+}
+
+/* Estilos específicos para TagManager */
+.add-tag-section {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding-bottom: 15px;
+  border-bottom: 1px dashed #eee;
+}
+
+.new-tag-input {
+  flex-grow: 1;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1em;
+}
+
+.new-tag-color-picker {
+  width: 40px; /* Tamaño más pequeño para el selector de color */
+  height: 40px;
+  padding: 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.add-tag-button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.2s ease;
+}
+
+.add-tag-button:hover {
+  background-color: #0056b3;
+}
+
+.tag-list-section {
+  flex-grow: 1;
+}
+
+.no-tags-message {
+  text-align: center;
+  color: #777;
+  padding: 20px;
+}
+
+.tag-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.tag-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.tag-item:last-child {
+  border-bottom: none;
+}
+
+.tag-name {
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: white; /* Texto blanco para que contraste con el color de fondo */
+  font-weight: bold;
+  font-size: 0.9em;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.2); /* Sombra para mejor lectura */
+  min-width: 80px; /* Asegura un ancho mínimo para la pastilla */
+  text-align: center;
+}
+
+.tag-color-picker {
+  width: 30px; /* Más pequeño para la edición */
+  height: 30px;
+  padding: 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: auto; /* Empuja el picker hacia la derecha */
+}
+
+.delete-tag-button {
+  background: none;
+  border: none;
+  color: #dc3545;
+  font-size: 1.5em;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0 5px;
+  margin-left: 10px; /* Espacio entre el picker y el botón de eliminar */
+}
+
+.delete-tag-button:hover {
+  color: #c82333;
+}
