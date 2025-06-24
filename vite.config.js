@@ -20,8 +20,9 @@ export default defineConfig({
         theme_color: '#ffffff',
         background_color: '#ffffff',
         display: 'standalone',
-        scope: '/',
-        start_url: '/',
+        start_url: '/my-app-notas/',
+        scope: '/my-app-notas/',
+
         icons: [
           {
             src: 'pwa-192x192.png',
